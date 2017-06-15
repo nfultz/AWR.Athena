@@ -22,7 +22,7 @@ setMethod(initialize, "AthenaDriver",
     # passed to parent builder, than unboxed, yuck
     # should ping RJDBC maintainers, and have them implement initialize methods instead
     jdbc <- JDBC(driverClass="com.amazonaws.athena.jdbc.AthenaDriver",
-                 classPath=system.file("java/AthenaJDBC41-1.1.0.jar", package = "AWR.Athena"),
+                 classPath=driver_path,
                  identifier.quote="'")
 
     .Object@jdrv = jdbc@jdrv

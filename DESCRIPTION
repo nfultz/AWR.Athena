@@ -1,7 +1,7 @@
 Package: AWR.Athena
 Type: Package
 Title: AWS Athena DBI Wrapper 
-Version: 0.1.0
+Version: 1.1.0
 Author: Neal Fultz <nfultz@gmail.com>, Gergely Daróczi <gergely@system1.com>
 Maintainer: Neal Fultz <nfultz@gmail.com>
 Description: "Amazon Athena is an interactive query service that makes it easy
