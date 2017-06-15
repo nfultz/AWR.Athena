@@ -44,7 +44,10 @@ setClass("AthenaConnection",
   )
 )
 
-#' @param drv An object created by \code{Kazam()}
+#' @param drv An object created by \code{Athena()}
+#' @param region the AWS region
+#' @param s3_staging_dir S3 bucket where results will be saved to
+#' @param schema_name Athena schema to use
 #' @rdname Athena
 #' @export
 #' @examples
@@ -52,6 +55,7 @@ setClass("AthenaConnection",
 #' require(DBI)
 #' con <- dbConnect(AWR.Athena::Athena(), region='us-west-2', s3_staging_dir='s3://nfultz-athena-staging', schema_name='default')
 #' dbListTables(con)
+#' dbGetQuery(con, "Select count(*) from sampledb.elb_logs")
 #' }
 setMethod("dbConnect", "AthenaDriver",
           function(drv, region, s3_staging_dir, schema_name, ...) {

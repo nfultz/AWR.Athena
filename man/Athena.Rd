@@ -12,7 +12,13 @@ Athena()
   ...)
 }
 \arguments{
-\item{drv}{An object created by \code{Kazam()}}
+\item{drv}{An object created by \code{Athena()}}
+
+\item{region}{the AWS region}
+
+\item{s3_staging_dir}{S3 bucket where results will be saved to}
+
+\item{schema_name}{Athena schema to use}
 }
 \description{
 Athena DBI wrapper
@@ -22,5 +28,6 @@ Athena DBI wrapper
 require(DBI)
 con <- dbConnect(AWR.Athena::Athena(), region='us-west-2', s3_staging_dir='s3://nfultz-athena-staging', schema_name='default')
 dbListTables(con)
+dbGetQuery(con, "Select count(*) from sampledb.elb_logs")
 }
 }
