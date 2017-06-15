@@ -44,11 +44,16 @@ setClass("AthenaConnection",
   )
 )
 
+#' Authentication credentials are read from the DefaultAWSCredentialsProviderChain, which includes the .aws folder and
+#' environment variables.
+#'
 #' @param drv An object created by \code{Athena()}
 #' @param region the AWS region
 #' @param s3_staging_dir S3 bucket where results will be saved to
 #' @param schema_name Athena schema to use
+#' @param ... Other options
 #' @rdname Athena
+#' @seealso \href{http://docs.aws.amazon.com/athena/latest/ug/connect-with-jdbc.html#jdbc-options}{Athena Manual} for more connections options.
 #' @export
 #' @examples
 #' \dontrun{
@@ -63,7 +68,7 @@ setMethod("dbConnect", "AthenaDriver",
   con <- callNextMethod(drv, url=sprintf('jdbc:awsathena://athena.%s.amazonaws.com:443/', region),
                    s3_staging_dir=s3_staging_dir,
                    schema_name=schema_name,
-                   aws_credentials_provider_class="com.amazonaws.athena.jdbc.shaded.com.amazonaws.auth.DefaultAWSCredentialsProviderChain")
+                   aws_credentials_provider_class="com.amazonaws.athena.jdbc.shaded.com.amazonaws.auth.DefaultAWSCredentialsProviderChain", ...)
 
   new("AthenaConnection", jc = con@jc, identifier.quote = drv@identifier.quote, region=region, s3_staging_dir=s3_staging_dir, schema_name=schema_name)
 })

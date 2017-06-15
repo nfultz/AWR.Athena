@@ -19,9 +19,14 @@ Athena()
 \item{s3_staging_dir}{S3 bucket where results will be saved to}
 
 \item{schema_name}{Athena schema to use}
+
+\item{...}{Other options}
 }
 \description{
 Athena DBI wrapper
+
+Authentication credentials are read from the DefaultAWSCredentialsProviderChain, which includes the .aws folder and
+environment variables.
 }
 \examples{
 \dontrun{
@@ -30,4 +35,7 @@ con <- dbConnect(AWR.Athena::Athena(), region='us-west-2', s3_staging_dir='s3://
 dbListTables(con)
 dbGetQuery(con, "Select count(*) from sampledb.elb_logs")
 }
+}
+\seealso{
+\href{http://docs.aws.amazon.com/athena/latest/ug/connect-with-jdbc.html#jdbc-options}{Athena Manual} for more connections options.
 }
