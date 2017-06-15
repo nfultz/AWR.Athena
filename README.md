@@ -36,7 +36,7 @@ features in mind, please open a ticket on the feature request, or even better, s
 
 ## It doesn't work here!
 
-To be able to use this package, you need to have an [AWS account](https://aws.amazon.com/free). If you do not have one already, you can register for free at Amazon and do 20K free requests per month, although usage is currently $5 / terabyte scanned.
+To be able to use this package, you need to have an [AWS account](https://aws.amazon.com/free). If you do not have one already, you can register for free at Amazon although usage is currently $5 / terabyte scanned.
 
 Once you have an AWS account, make sure your default AWS Credentials are available via the [DefaultAWSCredentialsProviderChain ](http://docs.aws.amazon.com/sdk-for-java/v1/developer-guide/credentials.html). 
 In short, you either provide a default credential profiles file at `~/.aws/credentials`, use the `AWS_ACCESS_KEY_ID` and `AWS_SECRET_ACCESS_KEY` environment variables or if using `AWR.Athena` on AWS, you can also rely on the EC2 instance profile credentials 
