@@ -16,11 +16,22 @@ devtools::install_github('nfultz/AWR.Athena')
 
 ## What is it good for?
 
+This provides a simplified DBI driver for Athena:
+
+```r
+require(DBI)
+con <- dbConnect(AWR.Athena::Athena(), region='us-west-2', s3_staging_dir='s3://nfultz-athena-staging', schema_name='default')
+dbListTables(con)
+dbGetQuery(con, "Select count(*) from sampledb.elb_logs")
+```
+
+Installing and using the JDBC driver package is handled automatically. 
+
 
 
 ## What if I want to do other cool things with Athena and R?
 
-Most functionality is provided via JDBC is mostly provided upstream, but if you have Athena-specific
+Most database functionality is provided via actually provided by RJDBC, but if you have Athena-specific
 features in mind, please open a ticket on the feature request, or even better, submit a pull request :)
 
 ## It doesn't work here!
