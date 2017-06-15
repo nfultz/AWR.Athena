@@ -15,11 +15,12 @@ driver_path <- NULL
         }
 
         ## download the jar file from AWS
-        tryCatch(download.file(
+        try(download.file(
             url = sprintf(
                 'https://s3.amazonaws.com/athena-downloads/drivers/AthenaJDBC41-%s.jar',
                 packageVersion(pkgname)),
-            destfile = path, mode = 'wb'), error = function(e) e)
+            destfile = path, mode = 'wb'),
+            silent = TRUE)
 
     }
 
