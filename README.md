@@ -27,11 +27,9 @@ dbGetQuery(con, "Select count(*) from sampledb.elb_logs")
 
 Installing and using the JDBC driver package is handled automatically. 
 
-
-
 ## What if I want to do other cool things with Athena and R?
 
-Most database functionality is provided via actually provided by RJDBC, but if you have Athena-specific
+Most database functionality is actually provided by RJDBC, but if you have Athena-specific
 features in mind, please open a ticket on the feature request, or even better, submit a pull request :)
 
 ## It doesn't work here!
