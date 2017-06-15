@@ -1,4 +1,4 @@
-# AWS.Athena
+# AWR.Athena
 
 This an R client to interact with the [AWS Athena](https://aws.amazon.com/athena), including wrapper functions 
 around the [Athena JDBC package](http://docs.aws.amazon.com/athena/latest/ug/connect-with-jdbc.html) to 
