@@ -1,5 +1,3 @@
-driver_path <- NULL
-
 .onLoad <- function(libname, pkgname) {
 
     ## path to the JDBC driver
@@ -8,11 +6,6 @@ driver_path <- NULL
 
     ## check if the jar is available and install if needed (on first load)
     if (!file.exists(path)) {
-
-        ## create the java folder in the package install folder if not yet available
-        if (!dir.exists(dirname(path))) {
-            dir.create(dirname(path), recursive = TRUE)
-        }
 
         ## download the jar file from AWS
         try(download.file(
@@ -24,8 +17,8 @@ driver_path <- NULL
 
     }
 
-    ## update path to the driver
-    utils::assignInMyNamespace('driver_path', path)
+    ## add the RJDBC driver and the log4j properties file to classpath
+    rJava::.jpackage(pkgname, lib.loc = libname)
 
 }
 
