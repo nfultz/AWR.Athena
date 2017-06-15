@@ -3,8 +3,14 @@
 \docType{class}
 \name{AthenaDriver-class}
 \alias{AthenaDriver-class}
+\alias{AthenaDriver}
 \title{Athena driver class.}
+\usage{
+\S4method{initialize}{AthenaDriver}(.Object, ...)
+}
 \description{
 Athena driver class.
+
+Constructor of AthenaDriver
 }
 \keyword{internal}

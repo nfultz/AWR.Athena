@@ -31,7 +31,9 @@ environment variables.
 \examples{
 \dontrun{
 require(DBI)
-con <- dbConnect(AWR.Athena::Athena(), region='us-west-2', s3_staging_dir='s3://nfultz-athena-staging', schema_name='default')
+con <- dbConnect(AWR.Athena::Athena(), region='us-west-2', 
+                 s3_staging_dir='s3://nfultz-athena-staging', 
+                 schema_name='default')
 dbListTables(con)
 dbGetQuery(con, "Select count(*) from sampledb.elb_logs")
 }

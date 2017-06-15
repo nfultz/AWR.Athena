@@ -13,7 +13,8 @@ LazyData: true
 Imports:
   DBI (>= 0.3.0),
   methods,
-  RJDBC
+  RJDBC,
+  rJava
 Suggests:
   DBItest, testthat
 RoxygenNote: 6.0.1

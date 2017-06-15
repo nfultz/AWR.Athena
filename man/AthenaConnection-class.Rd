@@ -5,6 +5,6 @@
 \alias{AthenaConnection-class}
 \title{Athena connection class.}
 \description{
-Athena connection class.
+Class which represents the Athena connections.
 }
 \keyword{internal}

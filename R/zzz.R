@@ -1,3 +1,5 @@
+#' @importFrom utils packageVersion download.file
+#' @importFrom rJava .jpackage
 .onLoad <- function(libname, pkgname) {
 
     ## path to the JDBC driver
