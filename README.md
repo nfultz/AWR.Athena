@@ -6,8 +6,6 @@ to query data stored in S3.
 
 ## Installation
 
-![CRAN version](http://www.r-pkg.org/badges/version-ago/AWR.KMS)
-
 The package is not yet hosted on CRAN. 
 
 But you can easily install the most recent development version of the R package as well:
