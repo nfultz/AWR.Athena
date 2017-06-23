@@ -6,9 +6,13 @@ query data stored in S3.
 
 ## Installation
 
-The package is not yet hosted on CRAN. 
+![CRAN version](http://www.r-pkg.org/badges/version-ago/AWR.Athena)
 
-But you can easily install the most recent development version of the R package as well:
+```r
+install.packages("AWR.Athena")
+```
+
+Or you can easily install the most recent development version of the R package as well:
 
 ```r
 devtools::install_github('nfultz/AWR.Athena')
