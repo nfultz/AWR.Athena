@@ -82,7 +82,9 @@ setMethod("dbConnect", "AthenaDriver",
 
 #' Send query and retrieve results
 #' @export
-setMethod("dbGetQuery", "AthenaConnection", function(conn, statement, ...) {
+#' @importFrom methods signature
+setMethod("dbGetQuery", signature(conn = "AthenaConnection", statement = "character"),
+          def = function(conn, statement, ...) {
 
   res <- dbSendQuery(conn, statement, ...)
   ## Athena can only pull 999 rows at a time
