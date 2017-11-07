@@ -79,6 +79,12 @@ setMethod("dbConnect", "AthenaDriver",
   new("AthenaConnection", jc = con@jc, identifier.quote = drv@identifier.quote, region=region, s3_staging_dir=s3_staging_dir, schema_name=schema_name)
 })
 
+#' Execute an Athena Query
+#' 
+#' @param conn An Athena Connection
+#' @param statement A SQL statement
+#' @param ... delegated to JDBC
+#'  
 #' @export
 setMethod("dbSendQuery", c("AthenaConnection", "character"), 
           function(conn, statement, ...){
@@ -98,7 +104,12 @@ setClass("AthenaResult",
 )
 
 
-
+#' Fetch Athena Results
+#' 
+#' @param res an AthenaResult
+#' @param n -1 for all, or how many records to fetch
+#' @param ... delegated to JDBC
+#' 
 #' @export
 setMethod("fetch", c("AthenaResult", "numeric"),
           function(res, n = -1, ...) {

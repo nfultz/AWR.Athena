@@ -3,8 +3,8 @@
 \docType{class}
 \name{AthenaResult-class}
 \alias{AthenaResult-class}
-\title{Athena connection class.}
+\title{Athena Results class.}
 \description{
-Class which represents the Athena connections.
+Class which represents the Athena results
 }
 \keyword{internal}
