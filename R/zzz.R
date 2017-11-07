@@ -2,8 +2,10 @@
 #' @importFrom rJava .jpackage
 .onLoad <- function(libname, pkgname) {
 
+    version <- packageVersion(pkgname)[1,1:3] # drop internal releases eg 1.1.0-1 -> 1.1.0
+  
     ## path to the JDBC driver
-    file <- sprintf('AthenaJDBC41-%s.jar', packageVersion(pkgname))
+    file <- sprintf('AthenaJDBC41-%s.jar', version)
     path <- file.path(system.file('java', package = pkgname), file)
 
     ## check if the jar is available and install if needed (on first load)
