@@ -78,3 +78,35 @@ setMethod("dbConnect", "AthenaDriver",
 
   new("AthenaConnection", jc = con@jc, identifier.quote = drv@identifier.quote, region=region, s3_staging_dir=s3_staging_dir, schema_name=schema_name)
 })
+
+#' @export
+setMethod("dbSendQuery", c("AthenaConnection", "character"), 
+          function(conn, statement, ...){
+            res <- callNextMethod(conn, statement, ...)
+            new("AthenaResult", jr = res@jr, md = res@md, pull = res@pull, stat=res@stat)
+})
+
+#' Athena Results class.
+#'
+#' Class which represents the Athena results
+#'
+#' @export
+#' @importClassesFrom RJDBC JDBCResult
+#' @keywords internal
+setClass("AthenaResult",
+         contains = "JDBCResult"
+)
+
+
+
+#' @export
+setMethod("fetch", c("AthenaResult", "numeric"),
+          function(res, n = -1, ...) {
+            # Note that Athena has restrictions on how many results to return,
+            # which may manifest as  the following error:
+            # Error in .jcall(rp, "I", "fetch", stride, block) : 
+            # java.sql.SQLException: The requested fetchSize is more than the allowed value in Athena. 
+            # Please reduce the fetchSize and try again. Refer to the Athena documentation for valid fetchSize values.
+
+            res <- callNextMethod(res, n, block = 999, ...)
+          })
