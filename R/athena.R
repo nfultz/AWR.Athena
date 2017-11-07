@@ -16,7 +16,7 @@ Athena <- function() {
 }
 
 #' Constructor of AthenaDriver
-#' 
+#'
 #' @name AthenaDriver
 #' @rdname AthenaDriver-class
 setMethod(initialize, "AthenaDriver",
@@ -62,8 +62,8 @@ setClass("AthenaConnection",
 #' @examples
 #' \dontrun{
 #' require(DBI)
-#' con <- dbConnect(AWR.Athena::Athena(), region='us-west-2', 
-#'                  s3_staging_dir='s3://nfultz-athena-staging', 
+#' con <- dbConnect(AWR.Athena::Athena(), region='us-west-2',
+#'                  s3_staging_dir='s3://nfultz-athena-staging',
 #'                  schema_name='default')
 #' dbListTables(con)
 #' dbGetQuery(con, "Select count(*) from sampledb.elb_logs")
@@ -77,4 +77,18 @@ setMethod("dbConnect", "AthenaDriver",
                    aws_credentials_provider_class="com.amazonaws.athena.jdbc.shaded.com.amazonaws.auth.DefaultAWSCredentialsProviderChain", ...)
 
   new("AthenaConnection", jc = con@jc, identifier.quote = drv@identifier.quote, region=region, s3_staging_dir=s3_staging_dir, schema_name=schema_name)
+
+})
+
+#' Send query and retrieve results
+#' @export
+#' @importFrom methods signature
+#' @importFrom DBI dbFetch dbSendQuery
+setMethod("dbGetQuery", signature(conn = "AthenaConnection", statement = "character"),
+          def = function(conn, statement, ...) {
+
+  res <- dbSendQuery(conn, statement, ...)
+  ## Athena can only pull 999 rows at a time
+  dbFetch(res, n = -1, block = 999)
+
 })
