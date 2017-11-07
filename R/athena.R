@@ -83,6 +83,7 @@ setMethod("dbConnect", "AthenaDriver",
 #' Send query and retrieve results
 #' @export
 #' @importFrom methods signature
+#' @importFrom DBI dbFetch dbSendQuery
 setMethod("dbGetQuery", signature(conn = "AthenaConnection", statement = "character"),
           def = function(conn, statement, ...) {
 
