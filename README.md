@@ -24,7 +24,7 @@ This provides a simplified DBI driver for Athena:
 
 ```r
 require(DBI)
-con <- dbConnect(AWR.Athena::Athena(), region='us-west-2', s3_staging_dir='s3://nfultz-athena-staging', schema_name='default')
+con <- dbConnect(AWR.Athena::Athena(), region='us-west-2', S3OutputLocation='s3://nfultz-athena-staging', Schema='default')
 dbListTables(con)
 dbGetQuery(con, "Select count(*) from sampledb.elb_logs")
 ```
