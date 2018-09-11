@@ -24,7 +24,7 @@ setMethod(initialize, "AthenaDriver",
 {
     # passed to parent builder, than unboxed, yuck
     # should ping RJDBC maintainers, and have them implement initialize methods instead
-    jdbc <- JDBC(driverClass="com.amazonaws.athena.jdbc.AthenaDriver",
+    jdbc <- JDBC(driverClass="com.simba.athena.jdbc.Driver",
                  identifier.quote="'")
 
     .Object@jdrv = jdbc@jdrv
@@ -43,8 +43,8 @@ setClass("AthenaConnection",
   contains = "JDBCConnection",
   slots = list(
     region = "character",
-    s3_staging_dir = "character",
-    schema_name = "character"
+    S3OutputLocation = "character",
+    Schema = "character"
   )
 )
 
@@ -53,8 +53,8 @@ setClass("AthenaConnection",
 #'
 #' @param drv An object created by \code{Athena()}
 #' @param region the AWS region
-#' @param s3_staging_dir S3 bucket where results will be saved to
-#' @param schema_name Athena schema to use
+#' @param S3OutputLocation S3 bucket where results will be saved to
+#' @param Schema Athena schema to use
 #' @param ... Other options
 #' @rdname Athena
 #' @seealso \href{http://docs.aws.amazon.com/athena/latest/ug/connect-with-jdbc.html#jdbc-options}{Athena Manual} for more connections options.
@@ -63,20 +63,20 @@ setClass("AthenaConnection",
 #' \dontrun{
 #' require(DBI)
 #' con <- dbConnect(AWR.Athena::Athena(), region='us-west-2', 
-#'                  s3_staging_dir='s3://nfultz-athena-staging', 
-#'                  schema_name='default')
+#'                  S3OutputLocation='s3://nfultz-athena-staging', 
+#'                  Schema='default')
 #' dbListTables(con)
 #' dbGetQuery(con, "Select count(*) from sampledb.elb_logs")
 #' }
 setMethod("dbConnect", "AthenaDriver",
-          function(drv, region, s3_staging_dir, schema_name, ...) {
+          function(drv, region, S3OutputLocation, Schema, ...) {
 
   con <- callNextMethod(drv, url=sprintf('jdbc:awsathena://athena.%s.amazonaws.com:443/', region),
-                   s3_staging_dir=s3_staging_dir,
-                   schema_name=schema_name,
-                   aws_credentials_provider_class="com.amazonaws.athena.jdbc.shaded.com.amazonaws.auth.DefaultAWSCredentialsProviderChain", ...)
+                   S3OutputLocation=S3OutputLocation,
+                   Schema=Schema,
+                   AWSCredentialsProviderClass="com.simba.athena.amazonaws.auth.DefaultAWSCredentialsProviderChain", ...)
 
-  new("AthenaConnection", jc = con@jc, identifier.quote = drv@identifier.quote, region=region, s3_staging_dir=s3_staging_dir, schema_name=schema_name)
+  new("AthenaConnection", jc = con@jc, identifier.quote = drv@identifier.quote, region=region,S3OutputLocation=S3OutputLocation, Schema=Schema)
 })
 
 #' Execute an Athena Query
