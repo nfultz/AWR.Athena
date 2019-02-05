@@ -8,7 +8,7 @@
 \usage{
 Athena()
 
-\S4method{dbConnect}{AthenaDriver}(drv, region, s3_staging_dir, schema_name,
+\S4method{dbConnect}{AthenaDriver}(drv, region, S3OutputLocation, Schema,
   ...)
 }
 \arguments{
@@ -16,9 +16,9 @@ Athena()
 
 \item{region}{the AWS region}
 
-\item{s3_staging_dir}{S3 bucket where results will be saved to}
+\item{S3OutputLocation}{S3 bucket where results will be saved to}
 
-\item{schema_name}{Athena schema to use}
+\item{Schema}{Athena schema to use}
 
 \item{...}{Other options}
 }
@@ -32,8 +32,8 @@ environment variables.
 \dontrun{
 require(DBI)
 con <- dbConnect(AWR.Athena::Athena(), region='us-west-2', 
-                 s3_staging_dir='s3://nfultz-athena-staging', 
-                 schema_name='default')
+                 S3OutputLocation='s3://nfultz-athena-staging', 
+                 Schema='default')
 dbListTables(con)
 dbGetQuery(con, "Select count(*) from sampledb.elb_logs")
 }
