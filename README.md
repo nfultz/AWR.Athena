@@ -6,7 +6,7 @@ query data stored in S3.
 
 ## Installation
 
-![CRAN version](http://www.r-pkg.org/badges/version-ago/AWR.Athena)
+[![CRAN version](http://www.r-pkg.org/badges/version-ago/AWR.Athena)](https://cran.r-project.org/package=AWR.Athena)
 
 ```r
 install.packages("AWR.Athena")
